@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Service Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div id="app" class="chat-container">
+        <div class="registration" v-if="!chatVisible">
+            <input v-model="email" placeholder="Enter your email" />
+            <input v-model="username" placeholder="Enter your username" />
+            <button @click="startChat" class="get-in-touch-button">Start a Conversation</button>
+        </div>
+        <div class="chat-window" v-if="chatVisible">
+            <div class="chat-header">
+                <h2>Customer Service Support</h2>
+            </div>
+            <div class="messages" ref="messages">
+                <div v-for="(message, index) in messages" :key="index">
+                    <div>{{ message.username }}</div>
+                    <div class="message">
+                        <div v-if="message.type === 'text'"> {{ message.content }}</div>
+                        <img v-if="message.type === 'image'" :src="message.content" alt="Image"
+                            class="uploaded-image" />
+                        <a v-if="message.type === 'file'" :href="message.content" target="_blank"
+                            :download="message.filename">{{
+                            message.filename }}</a>
+                    </div>
+                    <div class="timestamp">{{ message.timestamp }}</div>
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="upload-buttons">
+                    <label class="file-input-label">
+                        <i class="fas fa-smile smile-icon" @click="toggleSmileys"></i>
+                        <div v-if="showSmileys" class="smiley-picker">
+                            <span @click="addSmiley('😊')">😊</span>
+                            <span @click="addSmiley('😂')">😂</span>
+                            <span @click="addSmiley('😍')">😍</span>
+                            <span @click="addSmiley('😢')">😢</span>
+                            <span @click="addSmiley('😡')">😡</span>
+                        </div>
+                    </label>
+                    <label class="file-input-label">
+                        <input type="file" @change="sendImage" accept="image/*" class="image-input" />
+                        <i class="fas fa-image image-icon"></i>
+                    </label>
+                    <label class="file-input-label">
+                        <input type="file" @change="sendFile" accept="*/*" class="file-input" style="display: none;" />
+                        <i class="fas fa-paperclip file-icon"></i>
+                    </label>
+                </div>
+                <div class="input-send-container">
+                    <input v-model="message" @keyup.enter="sendMessage" placeholder="Type your message here..."
+                        class="message-input" ref="messageInput"/>
+                    <button @click="sendMessage" class="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <audio id="message-sound" src="message.wav" preload="auto"></audio> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

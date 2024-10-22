@@ -1,0 +1,238 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #adc9e6; 
+}
+
+#app {
+    text-align: center;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+.chat-header {
+    margin-bottom: 20px; 
+}
+
+.messages {
+    flex: 1; 
+    overflow-y: auto; 
+    margin-bottom: 10px; 
+    text-align: left;
+    padding-bottom: 5%;
+}
+
+.message-input {
+    border: none;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    border-top: 1px solid #fddba2;
+    border-radius: 0 0 8px 8px;
+    font-size: 14px;
+    background-color: #C4C8D0;
+    color: black;
+}
+
+.message-input::placeholder {
+    color: black;
+    opacity: 0.7;
+}
+
+.message-input:focus {
+    border-color: #fddba2;
+    box-shadow: 0 0 5px rgba(253, 219, 162, 0.5);
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.get-in-touch-button {
+    background-color: #1683c9e0;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.get-in-touch-button:hover {
+    background-color: #064771e0;
+    transform: translateY(-2px);
+}
+
+.uploaded-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    background-color: white; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 10px; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+    right: 0; 
+    z-index: 1000; 
+}
+
+.message-input {
+    width: 100%; 
+    border: none;
+    outline: none; 
+    padding: 10px; 
+    border-radius: 5px; 
+    background-color: #f7f7f7; 
+}
+
+.file-input-label {
+    cursor: pointer;
+    margin-left: 10px;
+    position: relative;
+}
+
+.image-input {
+    display: none;
+}
+
+.image-icon {
+    font-size: 24px;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.registration {
+    text-align: center;
+    margin: 20px;
+}
+
+.registration input {
+    margin: 5px;
+    padding: 10px;
+    width: calc(100% - 22px);
+}
+
+.file-input-label {
+    background: transparent;
+    border: none; 
+    cursor: pointer; 
+    font-size: 24px; 
+    margin-right: 10px; 
+}
+
+.image-icon,
+.file-icon,
+.smile-icon {
+    font-size: 18px;
+    color: #1683c9e0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message-content {
+    display: flex;
+    align-items: center;
+}
+
+.message {
+    display: inline-block; 
+    align-items: center; 
+    margin: 10px 0; 
+    background-color: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 0 20px 20px 20px;
+    width: max-content;
+}
+
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+}
+
+.upload-buttons {
+    display: flex; 
+    margin-bottom: 5px; 
+}
+
+.input-send-container {
+    display: flex; 
+    width: 100%; 
+}
+
+.message-input {
+    flex: 1; 
+    border: none; 
+    outline: none; 
+    padding: 10px; 
+    border-radius: 5px; 
+    background-color: #f7f7f7; 
+}
+
+.send-button {
+    background: transparent; 
+    border: none;
+    cursor: pointer; 
+    font-size: 24px; 
+    margin-left: 10px; 
+    align-self: center; 
+    color: #1683c9e0;
+}
+
+.upload-buttons {
+    display: flex; 
+    margin-bottom: 5px; 
+}
+
+.timestamp {
+    font-size: 0.8em; 
+    color: #888; 
+    margin-top: 5px; 
+    padding-right: 10px; 
+    display: inline-block; 
+    width: max-content;
+}
+
+.smiley-picker {
+    display: flex;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute; 
+    z-index: 10;
+}
+
+.smiley-picker span {
+    cursor: pointer;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.smiley-picker span:hover {
+    background-color: #f0f0f0;
+}
