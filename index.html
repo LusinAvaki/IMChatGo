@@ -21,17 +21,27 @@
                 <h2>Customer Service Support</h2>
             </div>
             <div class="messages" ref="messages">
-                <div v-for="(message, index) in messages" :key="index">
-                    <div>{{ message.username }}</div>
+                <div v-for="(message, index) in messages" :key="index"
+                    :class="{'customer-message': message.userId === 'customer', 'support-message':  message.userId !== 'customer'}">
                     <div class="message">
+                        <div class="username-container" v-if="message.userId === 'customer'">
+                            <img src="support.jpeg" alt="Profile Photo" class="profile-photo" />
+                            <span style="font-weight: bold;">{{ message.username }}</span>
+                        </div>
+                        <div v-else>
+                            <span style="font-weight: bold;">{{ message.username }}</span>
+                            <img src="profile.jpg" alt="Profile Photo" class="profile-photo" />
+                        </div>
+
                         <div v-if="message.type === 'text'"> {{ message.content }}</div>
                         <img v-if="message.type === 'image'" :src="message.content" alt="Image"
                             class="uploaded-image" />
                         <a v-if="message.type === 'file'" :href="message.content" target="_blank"
                             :download="message.filename">{{
                             message.filename }}</a>
+                        <div class="timestamp">{{ message.timestamp }}</div>
                     </div>
-                    <div class="timestamp">{{ message.timestamp }}</div>
+
                 </div>
             </div>
             <div class="input-container">
@@ -54,10 +64,39 @@
                         <input type="file" @change="sendFile" accept="*/*" class="file-input" style="display: none;" />
                         <i class="fas fa-paperclip file-icon"></i>
                     </label>
+                    <label class="file-input-label">
+                        <i class="fas fa-comments feedback-icon" @click="openFeedbackModal"></i>
+                    </label>
+                    <label class="file-input-label">
+                        <i class="fas fa-sign-out-alt leave-chat-icon" @click="openLeaveChatModal"></i>
+                    </label>
+
+                </div>
+                <div v-if="feedbackVisible" class="feedback-modal">
+                    <div class="feedback-content">
+                        <span class="close-button" @click="closeFeedbackModal">&times;</span>
+                        <h3>Leave Your Feedback</h3>
+                        <div class="star-rating">
+                            <span v-for="star in stars" :key="star" @click="setRating(star)"
+                                :class="{ 'active': star <= rating }"> <i class="fas fa-star"></i></span>
+                        </div>
+                        <textarea class="modal-textarea" v-model="feedbackText" placeholder="Your feedback here..."
+                            rows="4"></textarea>
+                        <button class="submit-button" @click="sendFeedback">Submit</button>
+
+                    </div>
+                </div>
+                <div v-if="leaveChatVisible" class="confirmation-modal">
+                    <div class="confirmation-content">
+                        <span class="close-button" @click="closeLeaveChatModal">&times;</span>
+                        <h3>Are you sure you want to leave?</h3>
+                        <button class="submit-button" @click="leaveChat">Leave Chat</button>
+                        <button class="cancel-button" @click="closeLeaveChatModal">Cancel</button>
+                    </div>
                 </div>
                 <div class="input-send-container">
                     <input v-model="message" @keyup.enter="sendMessage" placeholder="Type your message here..."
-                        class="message-input" ref="messageInput"/>
+                        class="message-input" ref="messageInput" />
                     <button @click="sendMessage" class="send-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
